@@ -1,0 +1,84 @@
+<title>{{ setTitle("Add Patient") }}</title>
+<div class="card card-default">
+    <div class="card-header">
+        <h4 class="card-title">
+            <div class="row">
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-primary" [routerLink]="['/patient']">
+                        <i class="fas fa-arrow-circle-left"></i>&nbsp;&nbsp;Back to list
+                    </button>
+                </div>
+                <div class="col-md-8 text-center">
+                    <i class="glyphicon glyphicon-search text-gold"></i>
+                    <b class="text-center">Add new patient</b>
+                </div>
+            </div>
+        </h4>
+    </div>
+    <form [formGroup]="patientForm" (ngSubmit)="onFormSubmit(patientForm.value)">
+        <div id="collapse1" class="collapse show">
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="col-md-4 col-sm-12">
+                        <div class="form-group">
+                            <label class="control-label">Patient Name <span style="font-size: 12px; color: red" class="badge badge-light">required</span></label>
+                            <input matInput type="text" class="form-control" formControlName="patient_name" placeholder="John Doe"/>
+                        </div>
+                        <mat-error>
+                            <span *ngIf="!patientForm.get('patient_name').valid && patientForm.get('patient_name').touched">Please enter Patient Name</span>
+                        </mat-error>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <div class="form-group">
+                            <label class="control-label">Select gender <span style="font-size: 12px; color: red" class="badge badge-light">required</span></label>
+                            <select class="custom-select" required data-live-search="true" formControlName="gender">
+                                <option value="">Please select gender</option>
+                                <option *ngFor="let gender of genders" [value]="gender">{{gender}}</option>
+                            </select>
+                        </div>
+                        <mat-error>
+                            <span *ngIf="!patientForm.get('gender').valid && patientForm.get('gender').touched">Please select gender</span>
+                        </mat-error>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <div class="form-group">
+                            <label for="birth_Date" class="control-label">Date Of Birth <span style="font-size: 12px; color: red" class="badge badge-light">required</span></label>
+                            <input type="text"
+                                   id="birth_Date"
+                                   formControlName="birth_Date"
+                                   placeholder="Datepicker"
+                                   class="form-control"
+                                   bsDatepicker>
+                        </div>
+                        <mat-error>
+                            <span *ngIf="!patientForm.get('birth_Date').valid && patientForm.get('birth_Date').touched">Please choose DoB</span>
+                        </mat-error>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="control-label">Address <span style="font-size: 12px; color: red" class="badge badge-light">required</span></label>
+                            <input type="text" class="form-control" formControlName="address"/>
+                        </div>
+                        <mat-error>
+                            <span *ngIf="!patientForm.get('address').valid && patientForm.get('address').touched">Please enter address</span>
+                        </mat-error>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="text-right">
+                        <button type="submit" [disabled]="!patientForm.valid" class="btn btn-success btn-lg">
+                            <i class="fa fa-save"></i> Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

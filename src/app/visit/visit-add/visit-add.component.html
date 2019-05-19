@@ -1,0 +1,99 @@
+<title>{{ setTitle("Add new visit") }}</title>
+<div class="card card-default">
+    <div class="card-header">
+        <h4 class="card-title">
+            <div class="row">
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-primary" [routerLink]="['/visit']">
+                        <i class="fas fa-arrow-circle-left"></i>&nbsp;&nbsp;Back to list
+                    </button>
+                </div>
+                <div class="col-md-8 text-center">
+                    <i class="glyphicon glyphicon-search text-gold"></i>
+                    <b class="text-center">Add new visit</b>
+                </div>
+            </div>
+        </h4>
+    </div>
+    <form [formGroup]="visitForm" (ngSubmit)="onFormSubmit(visitForm.value)">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="control-label">Select patient <span style="font-size: 12px; color: red"
+                                                                          class="badge badge-light">required</span></label>
+                        <select (change)="selectChangeHandler($event)" class="custom-select" required data-live-search="true" formControlName="patientList">
+                            <option value="">Please select patient</option>
+                            <option *ngFor="let patient of patientList"
+                                    [value]="patient.id">
+                                {{patient.patient_name}} - {{patient.birth_Date | date: 'dd/MM/yyyy'}}
+                            </option>
+                        </select>
+                    </div>
+                    <mat-error>
+                        <span *ngIf="!visitForm.get('patientList').valid && visitForm.get('patientList').touched">Please select patient</span>
+                    </mat-error>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="visit_reason" class="control-label">Visit Reason <span style="font-size: 12px; color: red"
+                                                                            class="badge badge-light">required</span></label>
+                            <input matInput type="text" class="form-control" formControlName="visit_reason" id="visit_reason"
+                                   placeholder="Reason of visit"/>
+                        </div>
+                        <mat-error>
+                            <span *ngIf="!visitForm.get('visit_reason').valid && visitForm.get('visit_reason').touched">Please enter reason for visit</span>
+                        </mat-error>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="main_diagnose" class="control-label">Main diagnose <span
+                                    style="font-size: 12px; color: red"
+                                    class="badge badge-light">required</span></label>
+                            <!--                            <input matInput type="text" class="form-control" formControlName="main_diagnose"-->
+                            <!--                                   placeholder="Main diagnosis"/>-->
+                            <textarea formControlName="main_diagnose" id="main_diagnose" placeholder="Main diagnosis"
+                                      cols="30" rows="10" style="min-width: 100%;"></textarea>
+                        </div>
+                        <mat-error>
+                            <span *ngIf="!visitForm.get('main_diagnose').valid && visitForm.get('main_diagnose').touched">Please enter main diagnose</span>
+                        </mat-error>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="optional_diagnose" class="control-label">Optional diagnose
+                                <!-- <span style="font-size: 12px; color: red" class="badge badge-light">required</span> -->
+                            </label>
+<!--                            <input matInput type="text" class="form-control" formControlName="optional_diagnose"-->
+<!--                                   placeholder="Optional diagnosis"/>-->
+                            <textarea formControlName="optional_diagnose" id="optional_diagnose" placeholder="Optional diagnosis"
+                                      cols="30" rows="10" style="min-width: 100%;"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="text-right">
+                        <button type="submit" [disabled]="!visitForm.valid" class="btn btn-success btn-lg">
+                            <i class="fa fa-save"></i> Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

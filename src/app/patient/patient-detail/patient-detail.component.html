@@ -1,0 +1,134 @@
+<title>{{ setTitle("Patients Detail") }}</title>
+
+<div class="container">
+    <div class="card card-default">
+        <div class="card-header">
+            <h4 class="card-title">
+                <div class="row">
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-primary" [routerLink]="['/patient']">
+                            <i class="fas fa-arrow-circle-left"></i>&nbsp;&nbsp;Back to list
+                        </button>
+                    </div>
+                    <div class="col-md-8 text-center">
+                        <i class="glyphicon glyphicon-search text-gold"></i>
+                        <b class="text-center">Detail of patient: {{ patient.patient_name }}</b>
+                    </div>
+                    <div class="col-md-2 text-right">
+                        <button type="button" class="btn btn-success" [routerLink]="['/patient/edit', patient.id]">
+                            <i class="fas fa-edit"></i>&nbsp;&nbsp;Edit
+                        </button>
+                    </div>
+                </div>
+            </h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                    <div class="our-services-wrapper mb-60">
+                        <div class="services-inner">
+                            <div class="our-services-img">
+                                <img src="https://www.sba.gov/sites/default/files/2018-04/BG_Choose_your_business_name_dba.png"
+                                     width="68px" alt="">
+                            </div>
+                            <div class="our-services-text">
+                                <h4>Name</h4>
+                                <p>{{patient.patient_name}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                    <div class="our-services-wrapper mb-60">
+                        <div class="services-inner">
+                            <div class="our-services-img">
+                                <img src="https://assets.production.spokeo.com/assets/v9/shared/icons/home_icon-9cbbf13c627c058f6ea6427ec34de4953b8f32702d35f2b0fc725cb506588b24.svg"
+                                     width="68px" alt="">
+                            </div>
+                            <div class="our-services-text">
+                                <h4>Address</h4>
+                                <p>{{patient.address}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="our-services-wrapper mb-60">
+                        <div class="services-inner">
+                            <div class="our-services-img">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Combotrans.svg/1920px-Combotrans.svg.png"
+                                     width="68px" alt="">
+                            </div>
+                            <div class="our-services-text">
+                                <h4>Gender</h4>
+                                <p>{{patient.gender}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="our-services-wrapper mb-60">
+                        <div class="services-inner">
+                            <div class="our-services-img">
+                                <img src="https://www.astrosage.com/astrology/images/calendar-date-astrology.jpg"
+                                     width="68px" alt="">
+                            </div>
+                            <div class="our-services-text">
+                                <h4>Date of Birth</h4>
+                                <p>{{patient.birth_Date | date: 'dd-MM-yyyy'}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card card-default" *ngFor="let visit of patient.visitList | orderBy: 'id'">
+        <div class="card-header">
+            <h4 class="card-title">
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8 text-center">
+                        <i class="glyphicon glyphicon-search text-gold"></i>
+                        <b class="text-center">Visit reason: {{ visit.visit_reason }}</b>
+                    </div>
+                    <div class="col-md-2 text-right"></div>
+                </div>
+            </h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="our-services-wrapper mb-60">
+                        <div class="services-inner">
+                            <div class="our-services-img">
+                                <img src="https://www.astrosage.com/astrology/images/calendar-date-astrology.jpg"
+                                     width="68px" alt="">
+                            </div>
+                            <div class="our-services-text">
+                                <h4>Main Diagnose</h4>
+                                <p>{{ visit.main_diagnose }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="our-services-wrapper mb-60">
+                        <div class="services-inner">
+                            <div class="our-services-img">
+                                <img src="https://www.astrosage.com/astrology/images/calendar-date-astrology.jpg"
+                                     width="68px" alt="">
+                            </div>
+                            <div class="our-services-text">
+                                <h4>Optinal Diagnose</h4>
+                                <p>{{ visit.optional_diagnose }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

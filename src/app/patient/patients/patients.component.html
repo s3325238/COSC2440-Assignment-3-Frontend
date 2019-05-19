@@ -1,0 +1,51 @@
+<title>{{ setTitle("Patients List") }}</title>
+<h1 class="text-center">Patient List</h1>
+<div style="margin-bottom: 10px">
+    <button type="button" class="btn btn-primary" [routerLink]="['/patient/add']">
+        <i class="fas fa-user-plus"></i>&nbsp;&nbsp;Add new
+    </button>
+</div>
+<div>
+
+    <table class="table table-striped" border='1' width='100%' style='border-collapse: collapse;'>
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Patient Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Date of Birth</th>
+            <th scope="col">Acction</th>
+        </tr>
+        </thead>
+
+        <tr *ngFor="let patient of data">
+            <td>{{ patient.id }}</td>
+            <td>{{ patient.patient_name }}</td>
+            <td>
+                {{
+                    patient.address.length > 30 ? patient.address.substr(0,30) + " ..." : patient.address
+                }}
+            </td>
+            <td>{{ patient.gender }}</td>
+            <td>{{ patient.birth_Date | date: 'dd-MM-yyyy'}}</td>
+            <td>
+                <button style="margin-right: 10px" type="button" class="btn btn-primary"
+                        [routerLink]="['/patient/detail/', patient.id]">
+                    <i class="fas fa-info-circle"></i> Detail
+                </button>
+
+                <button style="margin-right: 10px" type="button" class="btn btn-success"
+                        [routerLink]="['/patient/edit', patient.id]">
+                    <i class="fas fa-edit"></i> Edit
+                </button>
+
+                <button type="button" class="btn btn-danger" (click)="deletePatient(patient.id)">
+                    <i class="fas fa-trash-alt"></i> Delete
+                </button>
+            </td>
+        </tr>
+<!--        <ngb-pagination [collectionSize]="70" [(page)]="page" [boundaryLinks]="true"></ngb-pagination>-->
+        <!--        </ng-template>-->
+    </table>
+</div>
